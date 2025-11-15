@@ -2,15 +2,13 @@
 import "./Item.css";
 
 // We define <Item /> by writing a function called Item
-function Item() {
+function Item(props) {
+  // props = { image: "...", name: "..." } because we did <Item image="..." name="..." />
   // Components can only return one thing. That's why we wrapped everything in a div.
   return (
     <div className="item">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEZuT1CDTg-N6EMe8cAlh000s1VjUxeVbnKw&s"
-        className="logo"
-      />
-      <h2>Five Guys</h2>
+      <img src={props.image} className="logo" />
+      <h2>{props.name}</h2>
     </div>
   );
 }

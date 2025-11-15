@@ -1,10 +1,18 @@
-//// I made this for us so we can speed up the workshop :)
-// function Tier() {
-//   return (
-//     <div>
-//       <h1>Tier</h1>
-//     </div>
-//   );
-// }
+import Item from "./Item";
 
-// export default Tier;
+function Tier(props) {
+  return (
+    <div>
+      <h1>Tier {props.tier}</h1>
+
+      {/* Turns a list of the JavaScript objects to a list of rendered components */}
+      {/* Go through the list and for each object, use the data to make an <Item/> */}
+      {props.list.map((item) => (
+        // This calls Item(name, image) in components/Item.jsx
+        <Item name={item.name} image={item.image} />
+      ))}
+    </div>
+  );
+}
+
+export default Tier;
