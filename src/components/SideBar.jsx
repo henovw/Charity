@@ -2,13 +2,12 @@ import "./SideBar.css"
 
 
 function SideBar(prop) {
-    
-    
     return (
         <div className="main">
             {prop.list.map((item) => {
             return <div>
-                <p>{item.name}</p>
+
+                <h2>{item.name}</h2>
 
             </div>
 
