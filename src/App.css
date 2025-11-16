@@ -2,10 +2,28 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: sans-serif;
+  font-family: monospace;
+
+  
 }
 
 .app {
   display: flex;
-  flex-direction: column;
+  background-image: linear-gradient(20deg, lightgrey, black);
+  border-radius: 10px;
+}
+body {
+    overflow: hidden;
+}
+
+.maintitle {
+    display: flex;
+    margin: 10px;
+}.maintitle>h1 {
+    background-color: coral;
+    padding: 20px;
+    border-radius: 20px;
+}.maintitle>h2 {
+    padding:20px;
+
 }

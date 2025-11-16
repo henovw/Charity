@@ -3,18 +3,16 @@ import GoogleMapReact from 'google-map-react';
 import './MainMap.css'
 import MiniDesc from "./MiniDesc"
 
-const ImageMarker = ({ img, onClick }) => (
-    <div className="iconDiv" onClick={onClick}>
+const ImageMarker = (props) => (
+    <div className="iconDiv" onClick={props.onClick}>
       <img 
         className="iconImage"
-        src={img}
-        alt="marker"
+        src={props.img}
       />
     </div>
   );
 
-function MainMap(props) {
-    const [selected, setSelected] = useState(null)
+function MainMap({ list, selected, onSelect }) {
 
     const defaultProps = {
         center: {
@@ -23,37 +21,42 @@ function MainMap(props) {
         },
         zoom: 13
       };
-    
+    const apiKey="AIzaSyBbv1HmlxvjKw8TfpeMszI8I5vUaPqUqTQ"
     return (
         <div className="mainContainer">
     
 
 
         <GoogleMapReact
-            bootstrapURLKeys={{ key: "" }}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
+        bootstrapURLKeys={{ key: apiKey }}
+        defaultCenter={defaultProps.center}
+        defaultZoom={defaultProps.zoom}
         >
-        {props.list.map((item) => (
-            <ImageMarker lat={item.lat} lng={item.lng} img={item.img}
-                onClick={() => setSelected(item)}
+        {list.map((item) => (
+            <ImageMarker
+            key={item.id}
+            lat={item.lat}
+            lng={item.lng}
+            img={item.img}
+            onClick={() => onSelect(item)}
             />
         ))}
 
-        {selected && <MiniDesc
+        {selected && (
+            <MiniDesc
             name={selected.name}
             description={selected.description}
-            onClose={() => setSelected(null)}
+            onClose={() => onSelect(null)}
             lat={selected.lat}
             lng={selected.lng}
             img={selected.img}
             categories={selected.categories}
             needs={selected.needs}
             link={selected.link}
-    
-        />}
+            />
+        )}
+        </GoogleMapReact>
 
-          </GoogleMapReact>
         </div>
       );
     }
