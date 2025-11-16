@@ -1,6 +1,4 @@
 import React from "react";
-import Leaderboard from "./Leaderboard";
-import LeaderboardData from "/src/data/leaderboardData.json"
 
 function NeighborGoodLogo() {
   return (
@@ -24,8 +22,6 @@ function NeighborGoodLogo() {
 }
 
 function Header({ user, points, theme, onToggleTheme }) {
-  const [showLeaderboard, setShowLeaderboard] = React.useState(false);
-
   return (
     <header className="header">
       <div>
@@ -38,26 +34,15 @@ function Header({ user, points, theme, onToggleTheme }) {
           Vancouver, based on where you are.
         </p>
       </div>
-
       <div className="header-right">
         {user && (
           <div className="points-display">
-            <span
-              className="points-user clickable"
-              onClick={() => setShowLeaderboard(true)}
-            >
-              Hi, {user}
-            </span>
-
+            <span className="points-user">Hi, {user.name}</span>
             <span className="points-value">{points} impact points</span>
           </div>
         )}
 
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={onToggleTheme}
-        >
+        <button type="button" className="theme-toggle" onClick={onToggleTheme}>
           {theme === "dark" ? "☀ Light" : "🌙 Dark"}
         </button>
 
@@ -65,19 +50,8 @@ function Header({ user, points, theme, onToggleTheme }) {
           Built for HackCamp 2025 · Best Hack for Social Good
         </div>
       </div>
-
-      {showLeaderboard && (
-        <div className="modal-backdrop" onClick={() => setShowLeaderboard(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <Leaderboard data={LeaderboardData}
-            onClose={() => setShowLeaderboard(false)}
-            currentUser={user}
-            currentUserPoints={points} />
-          </div>
-        </div>
-      )}
     </header>
   );
 }
 
-export default Header
+export default Header;

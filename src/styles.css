@@ -368,6 +368,17 @@
   }
   
   /* Pills & buttons */
+  .small-button{
+    justify-content: flex;
+    padding: 0.3rem 0.7rem;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    background: #4f46e5;
+    color: #ffffff;
+    border-radius: 999px;
+    align-items: center;
+  }
   
   .pill {
     padding: 0.15rem 0.5rem;
@@ -2916,3 +2927,5 @@ body {
 .app-root:not(.theme-dark) .charity-card-selected .charity-name {
   color: #1d4ed8;
 }
+
+

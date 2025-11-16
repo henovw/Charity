@@ -11,7 +11,10 @@ import { charities as baseCharities } from "./data/charities.js";
 import useUserLocation from "./hooks/useUserLocation.js";
 import { addDistanceToCharities } from "./utils/distance.js";
 
+
 function App() {
+
+  //STATE DECLARATIONS
   const { location, loading: locationLoading, error: locationError } =
     useUserLocation();
 
@@ -28,6 +31,9 @@ function App() {
   });
 
   const [selectedCharityId, setSelectedCharityId] = useState(null);
+
+
+  // FUNCTIONS
 
   // global helper for impact points (called from CharityCard)
   window.addNeighborGoodPoints = (amount) => {
@@ -109,6 +115,8 @@ function App() {
   const visitedCount = visitedIds.length;
   const donationClicks = Math.floor(points / 10); // 10 pts per donate click
 
+
+  // UI
   return (
     <div className={`app-root ${theme === "dark" ? "theme-dark" : ""}`}>
       <Header
@@ -134,14 +142,14 @@ function App() {
           points={points}
         />
 
-        {locationLoading && (
+        {/* {locationLoading && (
           <div className="location-status">
             <div className="loader"></div>
             <span>
               Detecting your location… you can still browse nearby charities.
             </span>
           </div>
-        )}
+        )} */}
 
         {locationError && (
           <div className="location-status error">

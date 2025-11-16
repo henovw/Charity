@@ -1,14 +1,18 @@
 // src/components/Login.jsx
 import React, { useEffect, useState } from "react";
 
+
+//login initial prompt
 function Login({ onLogin }) {
+  const [role, setRole] = useState(null); // "donor" | "charity" | null
   const [name, setName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const trimmed = name.trim();
     if (!trimmed) return;
-    onLogin(trimmed);
+    console.log("Submitting login with:", { name: trimmed, role });
+    onLogin({ name: trimmed, role });
   };
 
   // optional: scroll-reveal for sections
@@ -29,8 +33,16 @@ function Login({ onLogin }) {
     return () => observer.disconnect();
   }, []);
 
+
+  // RETURN
   return (
+
+    // landing page stuff
     <div className="landing-root">
+
+
+
+
       {/* Top nav */}
       <header className="landing-nav">
         <div className="landing-logo">
@@ -72,6 +84,8 @@ function Login({ onLogin }) {
         </nav>
       </header>
 
+      {/*paragraph blocks */}
+
       <main className="landing-main">
         {/* Hero section */}
         <section className="landing-hero">
@@ -112,19 +126,70 @@ function Login({ onLogin }) {
                   discover organizations near you.
                 </p>
 
-                <form className="landing-login-form" onSubmit={handleSubmit}>
-                  <label htmlFor="login-name">Name</label>
-                  <input
-                    id="login-name"
-                    type="text"
-                    placeholder="e.g. David"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                  <button className="button landing-login-button" type="submit">
-                    Continue to map
+                {/*initial interface*/}
+                {role === null && 
+                <div className="login-screen">
+                <h2>Are you a donor or a charity?</h2>
+
+                <div className="role-options">
+                  <button className="small-button" onClick={() => setRole("donor")}>
+                    I am a Donor
                   </button>
-                </form>
+
+                  <button className="small-button" onClick={() => setRole("charity")}>
+                    We are a Charity
+                  </button>
+                </div>
+              </div>
+}
+{role === "donor" && (
+      <div className="login-container">
+        <h2>Donor Login</h2>
+
+        <form onSubmit={handleSubmit} className="landing-login-form">
+          <input
+            id="login-name"
+            type="text"
+            placeholder="e.g. David"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <button className="button landing-login-button" type="submit">
+            Continue to map
+          </button>
+
+          <button className="small-button" type="button" onClick={() => setRole(null)}>
+            ← Back
+          </button>
+        </form>
+      </div>
+    )}
+
+    {/* 3. CHARITY LOGIN */}
+    {role === "charity" && (
+      <div className="login-container">
+        <h2>Charity Login</h2>
+
+        <form onSubmit={handleSubmit} className="landing-login-form">
+          <input
+            id="login-name"
+            type="text"
+            placeholder="Charity Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <button className="button landing-login-button" type="submit">
+            Continue to map
+          </button>
+
+          <button className="back-text" type="button" onClick={() => setRole(null)}>
+            ← Back
+          </button>
+        </form>
+      </div>
+    )}
 
                 <p className="landing-login-note">
                   No password needed for this prototype. A full version would
